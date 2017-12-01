@@ -283,16 +283,12 @@ public class SmartBarView extends BaseNavigationBar {
 
     @Override
     protected void onInflateFromUser() {
-        if (mEditor != null) {
-            mEditor.notifyScreenOn(mScreenOn);
-        }
+        mEditor.notifyScreenOn(mScreenOn);
     }
 
     @Override
     public void onRecreateStatusbar() {
-        if (mEditor != null) {
-            mEditor.updateResources(null);
-        }
+        mEditor.updateResources(null);
         updateCurrentIcons();
     }
 
@@ -408,9 +404,7 @@ public class SmartBarView extends BaseNavigationBar {
     public void setNavigationIconHints(int hints, boolean force) {
         if (!force && hints == mNavigationIconHints)
             return;
-        if (mEditor != null) {
-            mEditor.changeEditMode(BaseEditor.MODE_OFF);
-        }
+        mEditor.changeEditMode(BaseEditor.MODE_OFF);
         final boolean backAlt = (hints & StatusBarManager.NAVIGATION_HINT_BACK_ALT) != 0;
 
         mNavigationIconHints = hints;
@@ -448,9 +442,7 @@ public class SmartBarView extends BaseNavigationBar {
     @Override
     public void setDisabledFlags(int disabledFlags, boolean force) {
         super.setDisabledFlags(disabledFlags, force);
-        if (mEditor != null) {
-            mEditor.changeEditMode(BaseEditor.MODE_OFF);
-        }
+        mEditor.changeEditMode(BaseEditor.MODE_OFF);
 
         final boolean disableHome = ((disabledFlags & View.STATUS_BAR_DISABLE_HOME) != 0);
         final boolean disableRecent = ((disabledFlags & View.STATUS_BAR_DISABLE_RECENT) != 0);
@@ -488,9 +480,7 @@ public class SmartBarView extends BaseNavigationBar {
     @Override
     public void notifyScreenOn(boolean screenOn) {
         super.notifyScreenOn(screenOn);
-        if (mEditor != null) {
-            mEditor.notifyScreenOn(screenOn);
-        }
+        mEditor.notifyScreenOn(screenOn);
         ViewGroup hidden = (ViewGroup) getHiddenView().findViewWithTag(Res.Common.NAV_BUTTONS);
         for (String buttonTag : mCurrentSequence) {
             SmartButtonView v = findCurrentButton(buttonTag);
@@ -515,9 +505,7 @@ public class SmartBarView extends BaseNavigationBar {
 
     @Override
     protected void onKeyguardShowing(boolean showing) {
-        if (mEditor != null) {
-            mEditor.setKeyguardShowing(showing);
-        }
+        mEditor.setKeyguardShowing(showing);
         // TODO: temp hax to address package manager not having activity icons ready yet
         // this is new to N, likely part of new optimized boot time. In theory, activity
         // icons should be ready by the time lockscreen goes away. We will be stuck with this
@@ -553,9 +541,7 @@ public class SmartBarView extends BaseNavigationBar {
     public void setMenuVisibility(final boolean show, final boolean force) {
         if (!force && mShowMenu == show)
             return;
-        if (mEditor != null) {
-            mEditor.changeEditMode(BaseEditor.MODE_OFF);
-        }
+        mEditor.changeEditMode(BaseEditor.MODE_OFF);
         mShowMenu = show;
 
         // Only show Menu if IME switcher not shown.
@@ -590,14 +576,10 @@ public class SmartBarView extends BaseNavigationBar {
 
     @Override
     public void reorient() {
-        if (mEditor != null) {
-            mEditor.prepareToReorient();
-        }
+        mEditor.prepareToReorient();
         super.reorient();
         mBarTransitions.init();
-        if (mEditor != null) {
-            mEditor.reorient(mCurrentView == mRot90);
-        }
+        mEditor.reorient(mCurrentView == mRot90);
         mContextLeft = mCurrentView.findViewWithTag(Res.Softkey.CONTEXT_VIEW_LEFT);
         mContextRight = mCurrentView.findViewWithTag(Res.Softkey.CONTEXT_VIEW_RIGHT);
         mCurrentContext = mHasLeftContext ? mContextLeft : mContextRight;
@@ -841,7 +823,7 @@ public class SmartBarView extends BaseNavigationBar {
 
     @Override
     public boolean onStartPulse(Animation animatePulseIn) {
-        if (mEditor != null && mEditor.getMode() == BaseEditor.MODE_ON) {
+        if (mEditor.getMode() == BaseEditor.MODE_ON) {
             mEditor.changeEditMode(BaseEditor.MODE_OFF);
         }
         final View currentNavButtons = getCurrentView().findViewWithTag(Res.Common.NAV_BUTTONS);
